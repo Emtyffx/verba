@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"strict": true,
+		"target": "ESNext",
+		"module": "ESNext",
+		"lib": ["ESNext", "DOM"],
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"paths": {}
+	}
+}

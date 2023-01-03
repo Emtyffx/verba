@@ -1,0 +1,20 @@
+{
+	"name": "@durudex/verba",
+	"license": "MIT",
+	"version": "0.0.1",
+	"scripts": {
+		"prepare": "husky install"
+	},
+	"type": "module",
+	"devDependencies": {
+		"typescript": "^4.9.4"
+	},
+	"prettier": {
+		"useTabs": true,
+		"arrowParens": "avoid",
+		"bracketSpacing": false,
+		"quoteProps": "preserve",
+		"semi": false,
+		"singleQuote": true
+	}
+}
