@@ -1,7 +1,10 @@
-import {TodoStore, TodoStoreFilter} from '../store/store'
-
-declare var cell: any
-declare var dict: any
+import {cell, dict, View, InputString, Button, List, Checkbox} from '@durudex/verba'
+import {
+	Icon,
+	iconPathCheckAll,
+	iconPathClose,
+	iconPathPlus
+} from '@durudex/verba-material-icon'
 
 class TodoApp extends View {
 	@cell store() {return new TodoStore()}
@@ -126,7 +129,14 @@ class TodoApp extends View {
 
 	@cell Filters() {
 		return View.make({
-			kids: () => ['todo']
+			kids: () => TodoStoreFilters.map(id => this.Filter(id))
+		})
+	}
+
+	@dict Filter(id: TodoStoreFilter) {
+		return Button.make({
+			onClick: () => this.filter(id),
+			kids: () => [id]
 		})
 	}
 }

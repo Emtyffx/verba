@@ -1,3 +1,5 @@
+import {cell, View, Button} from '@durudex/verba'
+
 class Counter extends View {
 	@cell value(next = 0) {return next}
 
@@ -14,7 +16,6 @@ class Counter extends View {
 
 	@cell Value() {
 		return View.make({
-			tag: () => 'span',
 			kids: () => [this.value()],
 		})
 	}

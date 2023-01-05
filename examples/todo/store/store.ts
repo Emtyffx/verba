@@ -1,19 +1,22 @@
-// @ts-nocheck
+import {Obj, dict, localStorageItem, guid} from '@durudex/verba'
+
+// Можливо, потрібно винести з класу юзкейси (completed екшени, фільтрація)?
 
 interface TodoDto {
 	completed: boolean
 	title: string
 }
 
-export type TodoStoreFilter = 'all' | 'active' | 'completed'
+export const TodoStoreFilters = ['all', 'active', 'completed'] as const
+export type TodoStoreFilter = typeof TodoStoreFilters[number]
 
-export class TodoStore {
+export class TodoStore extends Obj {
 	itemIds(next?: string[]): string[] {
-		return storageLocal('todoIds', next) ?? []
+		return localStorageItem('todoIds', next) ?? []
 	}
 
 	item(id: string, next?: TodoDto | null) {
-		return storageLocal(`todo=${id}`, next)
+		return localStorageItem(`todo=${id}`, next)
 	}
 
 	@dict title(id: string, next?: string) {
