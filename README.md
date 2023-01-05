@@ -19,12 +19,6 @@
 
 A lightweight Web framework.
 
-## Why?
-
-- fast
-- elegant
-- powerful
-
 ## Example
 
 Here's a minimal Web application in Verba:
@@ -38,10 +32,11 @@ View.make({
 ### More examples
 
 - [counter](./examples/counter)
+- [to-do list](./examples/todo)
 
 ## Learn
 
-[Tutorial and documentation](https://verba.durudex.com/).
+[Tutorial and documentation](https://verba.durudex.com/) ([source](./docs)).
 
 Have fun!
 

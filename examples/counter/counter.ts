@@ -1,25 +1,25 @@
 class Counter extends View {
-	@solo value(next = 0) {return next}
+	@cell value(next = 0) {return next}
 
 	kids() {
 		return [this.Dec(), this.Value(), this.Inc()]
 	}
 
-	@solo Dec() {
+	@cell Dec() {
 		return Button.make({
 			onClick: () => this.value(this.value() - 1),
 			kids: () => ['-'],
 		})
 	}
 
-	@solo Value() {
+	@cell Value() {
 		return View.make({
 			tag: () => 'span',
 			kids: () => [this.value()],
 		})
 	}
 
-	@solo Inc() {
+	@cell Inc() {
 		return Button.make({
 			onClick: () => this.value(this.value() + 1),
 			kids: () => ['+'],
@@ -27,4 +27,4 @@ class Counter extends View {
 	}
 }
 
-new Counter().mount(document.body)
+Counter.make().mount(document.body)

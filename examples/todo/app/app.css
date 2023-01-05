@@ -1,0 +1,21 @@
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	padding: 1rem;
+}
+
+.TodoApp {
+	max-width: 50rem;
+
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.TodoApp_Title {
+	font-size: 3rem;
+}
+
+/* todo */
