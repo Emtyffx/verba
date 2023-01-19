@@ -1,3 +1,5 @@
+## Note: This is basic implementation of Verba framework
+
 <div align="center">
     <a href="https://discord.gg/4qcXbeVehZ">
         <img alt="Discord" src="https://img.shields.io/discord/882288646517035028?label=%F0%9F%92%AC%20discord">
