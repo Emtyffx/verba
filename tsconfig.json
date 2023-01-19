@@ -9,6 +9,11 @@
 		"experimentalDecorators": true,
 		"allowSyntheticDefaultImports": true,
 		"suppressImplicitAnyIndexErrors": true,
-		"paths": {}
-	}
+		"paths": {},
+		"outDir": "dist/"
+
+	},
+	"include": [
+		"src/"
+	]
 }
