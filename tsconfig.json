@@ -10,7 +10,7 @@
 		"allowSyntheticDefaultImports": true,
 		"suppressImplicitAnyIndexErrors": true,
 		"paths": {},
-		"outDir": "dist/"
+		"outDir": "dist/",
 
 	},
 	"include": [
