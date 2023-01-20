@@ -3,7 +3,7 @@
  *
  * @class Button
  */
-class Button {
+abstract class Button {
 	/**
 	 *
 	 *

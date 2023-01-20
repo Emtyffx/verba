@@ -11,7 +11,7 @@
 		"suppressImplicitAnyIndexErrors": true,
 		"paths": {},
 		"outDir": "dist/",
-
+		"declaration": true
 	},
 	"include": [
 		"src/"
