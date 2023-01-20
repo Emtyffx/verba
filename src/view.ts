@@ -19,7 +19,7 @@ abstract class View {
 	 * @return {*}  {ViewHelper}
 	 * @memberof View
 	 */
-	public static make({kids}: {kids: Array<any>}): ViewHelper {
+	public static make({kids}: {kids: () => Array<any>}): ViewHelper {
 		return new ViewHelper(kids)
 	}
 }
@@ -32,13 +32,13 @@ abstract class View {
 class ViewHelper {
 	private rootElement = document.createElement('div')
 	private root: Element = new Element()
-	private kids: Array<any> = []
+	private kids: () => Array<any>
 	/**
 	 * Creates an instance of ViewHelper.
 	 * @param {Array<any>} kids
 	 * @memberof ViewHelper
 	 */
-	public constructor(kids: Array<any>) {
+	public constructor(kids: () => Array<any>) {
 		this.kids = kids
   }
 
@@ -49,18 +49,21 @@ class ViewHelper {
 	 * @memberof ViewHelper
 	 */
 	public mount(root: Element) {
-		this.kids.forEach(el => {
+		this.kids().forEach(el => {
 			if (typeof el === 'string') {
 				const htmlElement = document.createElement('div')
 				htmlElement.innerHTML = el
 				this.rootElement.appendChild(htmlElement)
 			} else if (el instanceof HTMLButtonElement) {
 				let newElement = el
-				if (newElement.onclick)
-					newElement.onclick = (event: MouseEvent) => {
-						newElement.onclick!!(event)
-						this.mount(this.root)
+				Object.entries(newElement).forEach(([k, v]) => {
+					if (v instanceof Function) {
+						newElement[k] = (event: Event) => {
+							v(event)
+              this.rerender()
+						}
 					}
+				})
 				this.rootElement.appendChild(el)
 			} else if (el instanceof Element) {
 				this.rootElement.appendChild(el)
@@ -69,8 +72,7 @@ class ViewHelper {
 		this.root = root
 		root.appendChild(this.rootElement)
 	}
-	public rerender(kids: Array<any>) {
-		this.kids = kids
+	public rerender() {
 		this.root.removeChild(this.rootElement)
 		this.mount(this.root)
 	}
@@ -95,7 +97,7 @@ export class ViewBase extends Obj {
 	public constructor() {
 		super()
 		this.view_helper = View.make({
-			kids: this.kids()
+			kids: this.kids
 		})
 	}
 
