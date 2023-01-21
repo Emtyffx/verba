@@ -1,6 +1,4 @@
-import {cell, Obj} from '@krulod/wire/dist'
-const testSell = cell.ref('test', () => 1)
-
+import {Obj} from '@krulod/wire/dist'
 
 /**
  *
@@ -9,8 +7,6 @@ const testSell = cell.ref('test', () => 1)
  * @class View
  */
 abstract class View {
-
-
 	/**
 	 *
 	 *
@@ -31,7 +27,7 @@ abstract class View {
  */
 class ViewHelper {
 	private rootElement = document.createElement('div')
-	private root: Element = new Element()
+	private root: Element = document.createElement('div')
 	private kids: () => Array<any>
 	/**
 	 * Creates an instance of ViewHelper.
@@ -40,8 +36,7 @@ class ViewHelper {
 	 */
 	public constructor(kids: () => Array<any>) {
 		this.kids = kids
-  }
-
+	}
 
 	/**
 	 *
@@ -55,15 +50,6 @@ class ViewHelper {
 				htmlElement.innerHTML = el
 				this.rootElement.appendChild(htmlElement)
 			} else if (el instanceof HTMLButtonElement) {
-				let newElement = el
-				Object.entries(newElement).forEach(([k, v]) => {
-					if (v instanceof Function) {
-						newElement[k] = (event: Event) => {
-							v(event)
-              this.rerender()
-						}
-					}
-				})
 				this.rootElement.appendChild(el)
 			} else if (el instanceof Element) {
 				this.rootElement.appendChild(el)
@@ -72,8 +58,11 @@ class ViewHelper {
 		this.root = root
 		root.appendChild(this.rootElement)
 	}
-	public rerender() {
+	public rerender(kidsEl: () => Array<any>) {
+		this.rootElement.innerHTML = ''
 		this.root.removeChild(this.rootElement)
+		this.kids = kidsEl
+		console.log(this.kids)
 		this.mount(this.root)
 	}
 }
@@ -86,7 +75,7 @@ export class ViewBase extends Obj {
 	 * @return {*}  {Array<any>}
 	 * @memberof ViewBase
 	 */
-	private kids(): Array<any> {
+	kids(): Array<any> {
 		return []
 	}
 
@@ -97,14 +86,15 @@ export class ViewBase extends Obj {
 	public constructor() {
 		super()
 		this.view_helper = View.make({
-			kids: this.kids
+			kids: () => this.kids(),
 		})
 	}
 
 	public mount(root: Element) {
 		this.view_helper.mount(root)
 	}
-
+	rerender(kids: () => Array<any>) {
+		this.view_helper.rerender(() => kids())
+	}
 }
 export default View
-
