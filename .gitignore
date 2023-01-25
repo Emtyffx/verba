@@ -2,3 +2,5 @@
 dist
 .husky/_
 node_modules
+.gitignore
+.idea

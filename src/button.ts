@@ -10,7 +10,7 @@ abstract class Button {
 	 * @static
 	 * @param {{kids: Array<any>}} {kids, ...rest}
 	 * @return {*}  {Element}
-	 * @memberof Button
+	 * @memberOf Button
 	 */
 	public static make({kids, ...rest}: {kids: Array<any>}): Element {
 		const htmlElement = document.createElement('button')
